@@ -30,11 +30,15 @@ import PlaylistsProvider from './Providers/PlaylistsProvider';
 import AlbumPage from './Routes/Album/AlbumPage';
 
 function App() {
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') {
-      document.addEventListener('contextmenu', event => event.preventDefault());
-    }
-  }, []);
+  if (process.env.NODE_ENV !== 'development') {
+    useEffect(() => {
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        window.onbeforeunload = () => {
+          return 'Are you sure you want to leave?';
+        };
+      }, []);
+  }
 
   return (
     <SentryBoundary>
